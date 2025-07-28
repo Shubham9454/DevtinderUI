@@ -1,8 +1,8 @@
-## Componect Design 
+# Componect Design 
 
-# Body
-  # SignUp
-  # Login 
-  # Logout
-  # Profile
-  # Feed
+## Body
+  ### SignUp
+  ### Login 
+  ### Logout
+  ### Profile
+  ### Feed
