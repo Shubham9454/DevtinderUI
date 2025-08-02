@@ -1,14 +1,18 @@
+import { useSelector } from "react-redux";
 import Logo from "./images/logo.png";
 
 
 const Navbar = () =>{
+  const user = useSelector((store) => store.user);
+  console.log(user);
+
     return (
 
         <div className="navbar bg-base-300 shadow-sm pl-0">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl" href="">
             <img src={Logo} alt="DevTinder Logo" className="h-10 w-10 mr-1 rounded-full" />
-            DevTinder </a>
+            DevTinder</a>
         </div>
         <div className="flex gap-2">
           <input
@@ -16,11 +20,13 @@ const Navbar = () =>{
             placeholder="Search"
             className="input input-bordered w-24 md:w-auto"
           />
-          <div className="dropdown dropdown-end">
+          {user && (
+        
+            <div className="dropdown dropdown-end">Welcome, {user.data.firstName} 
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-ghost btn-circle avatar mx-1.5"
             >
               <div className="w-10 rounded-full">
                 <img
@@ -46,7 +52,7 @@ const Navbar = () =>{
                 <a>Logout</a>
               </li>
             </ul>
-          </div>
+          </div>)}
         </div>
       </div>
     );
