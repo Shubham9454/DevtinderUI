@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Logo from "./images/logo.png";
+import Logo from "../images/logo.png";
 
 
 const Navbar = () =>{
@@ -22,7 +22,7 @@ const Navbar = () =>{
           />
           {user && (
         
-            <div className="dropdown dropdown-end">Welcome, {user.data.firstName} 
+            <div className="dropdown dropdown-end">Welcome, {user.firstName} 
             <div
               tabIndex={0}
               role="button"
