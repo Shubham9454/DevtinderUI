@@ -11,10 +11,12 @@ const Login = () => {
   const userFromStore = useSelector((store) => store.user);
   const navigate = useNavigate();
 
-  if(userFromStore) navigate("/");
+  if(userFromStore) return navigate("/");
 
   const [emailID, setEmail] = useState("john123@gmail.com");
   const [password, setPassword] = useState("John@123");
+  const [error , setError] = useState("");
+
   const dispatch = useDispatch();
   
   const handleLogin = async () => {
@@ -34,13 +36,15 @@ const Login = () => {
       navigate("/")
       
     } catch (err) {
-      console.error(err);
+      setError(err?.response?.data  || "Something Went Wrong");
+      // console.error(err);
     }
   };
   return (
     <div className="flex justify-center my-20">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Log in to your account</legend>
+        <div className="text-red-400">{error}</div>
 
         <label className="label">Email</label>
         <input
@@ -59,7 +63,6 @@ const Login = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <button className="btn btn-neutral mt-4" onClick={handleLogin}>
           Login
         </button>
