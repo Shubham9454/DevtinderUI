@@ -1,4 +1,4 @@
-const UserCard = ({ user }) => {
+const ProfileCard = ({ user }) => {
   const { firstName, lastName, age, gender, about, photoURL, skills } = user;
 
   return (
@@ -13,13 +13,10 @@ const UserCard = ({ user }) => {
         </div>
 
         <p>{about}</p>
-        <div className="card-actions justify-end my-2">
-          <button className="btn btn-primary">Like</button>
-          <button className="btn btn-soft">Dislike</button>
-        </div>
+        
       </div>
     </div>
   );
 };
 
-export default UserCard;
+export default ProfileCard;
