@@ -24,12 +24,13 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connectionData) return;
+  if (!connectionData) return <h1 className="flex justify-center my-20">Connection data not found</h1>;
   else if (connectionData.length === 0)
     return <h1>No Connectiontions found</h1>;
 
   return (
-    <ul className="list bg-base-100 rounded-box shadow-md">
+    <div className="flex justify-center">
+    <ul className="list bg-base-150 rounded-box shadow-md w-1/2">
       <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
         Your Connections list
       </li>
@@ -59,6 +60,7 @@ const Connections = () => {
         );
       })}
     </ul>
+    </div>
   );
 };
 
