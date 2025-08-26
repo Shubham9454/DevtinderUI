@@ -24,42 +24,46 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connectionData) return <h1 className="flex justify-center my-20">Connection data not found</h1>;
+  if (!connectionData)
+    return (
+      <h1 className="flex justify-center my-20">Connection data not found</h1>
+    );
   else if (connectionData.length === 0)
     return <h1>No Connectiontions found</h1>;
 
   return (
     <div className="flex justify-center">
-    <ul className="list bg-base-150 rounded-box shadow-md w-1/2">
-      <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
-        Your Connections list
-      </li>
+      <ul className="list bg-base-150 rounded-box shadow-md w-1/2">
+        <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
+          Your Connections list
+        </li>
 
-      {connectionData.map((connection) => {
-        const { firstName, lastName, age, gender, about, photoURL } =
-          connection;
+        {connectionData.map((connection) => {
+          const { _id, firstName, lastName, age, gender, about, photoURL } =
+            connection;
 
-        return (
-          <li className="list-row">
-            <div>
-              <img className="size-10 rounded-box" src={photoURL} />
-            </div>
-            <div>
-              <div>{`${firstName} ${lastName}`}</div>
-              <div className="text-xs uppercase font-semibold opacity-60">
-                Remaining Reason
+          return (
+            <li key={_id} className="list-row">
+              <div>
+                <img className="size-10 rounded-box" src={photoURL} />
               </div>
-            </div>
-            <p className="list-col-wrap text-xs">
-              {about}
-            </p>
-            {age || gender &&<div className="justify-end">
-                <h1>{age + " " + gender}</h1>
-            </div>}
-          </li>
-        );
-      })}
-    </ul>
+              <div>
+                <div>{`${firstName} ${lastName}`}</div>
+                <div className="text-xs uppercase font-semibold opacity-60">
+                  Remaining Reason
+                </div>
+              </div>
+              <p className="list-col-wrap text-xs">{about}</p>
+              {age ||
+                (gender && (
+                  <div className="justify-end">
+                    <h1>{age + " " + gender}</h1>
+                  </div>
+                ))}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
