@@ -1,7 +1,7 @@
 import axios from "axios";
 import BASE_URL from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../utils/requestSlice";
+import { addRequest, removeRequest } from "../utils/requestSlice";
 import { useEffect } from "react";
 
 const Requests = () => {
@@ -10,10 +10,9 @@ const Requests = () => {
 
   const fetchRequest = async () => {
     try {
-      const res = await axios.get(
-        BASE_URL + "/user/requests/received", 
-        {withCredentials: true},
-      );
+      const res = await axios.get(BASE_URL + "/user/requests/received", {
+        withCredentials: true,
+      });
 
       dispatch(addRequest(res.data.data));
     } catch (err) {
@@ -21,20 +20,19 @@ const Requests = () => {
     }
   };
 
-  const handleRequest = async (status , _id) =>{
-    try{
-
+  const handleRequest = async (status, _id) => {
+    try {
       const res = await axios.post(
-        BASE_URL + "/request/review/" + status + "/" + _id, 
-        {} , 
-        {withCredentials: true}
+        BASE_URL + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
       );
-
+      dispatch(removeRequest(_id));
+      
+    } catch (err) {
+      console.error(err.data);
     }
-    catch(err){
-      console.error(err.data)
-    }
-  }
+  };
 
   useEffect(() => {
     fetchRequest();
@@ -57,30 +55,40 @@ const Requests = () => {
         </li>
 
         {requestData.map((request) => {
-          const {_id , firstName , lastName , photoURL} = request.fromUserId;
+          const { _id, firstName, lastName, photoURL } = request.fromUserId;
 
           return (
             <li key={_id} className="list-row">
               <div>
-                <img
-                  className="w-10 rounded-full"
-                  src={photoURL}
-                />
+                <img className="w-10 rounded-full" src={photoURL} />
               </div>
               <div>
-                <div>{firstName}{" " + lastName}</div>
+                <div>
+                  {firstName}
+                  {" " + lastName}
+                </div>
                 <div className="text-xs uppercase font-semibold opacity-60">
                   Remaining Reason
                 </div>
               </div>
-              <button className="btn btn-primary" onClick={() => handleRequest("accepted" , request._id)}>Accept</button>
-              <button className="btn btn-soft" onClick={() => handleRequest("rejected" , request._id)}>Decline</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleRequest("accepted", request._id)}
+              >
+                Accept
+              </button>
+              <button
+                className="btn btn-soft"
+                onClick={() => handleRequest("rejected", request._id)}
+              >
+                Decline
+              </button>
             </li>
-          )
+          );
         })}
       </ul>
     </div>
-  )
+  );
 };
 
 export default Requests;
