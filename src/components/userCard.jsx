@@ -2,11 +2,12 @@ import axios from "axios";
 import BASE_URL from "../utils/constants";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
   const { _id , firstName, lastName, age, gender, about, photoURL, skills } = user;
 
-  const [success , setSuccess] = useState(false);
+  //const [success , setSuccess] = useState(false);
   const dispatch = useDispatch();
 
   const handleConnection = async (status , userId) =>{
@@ -15,19 +16,13 @@ const UserCard = ({ user }) => {
       const res = await axios.post(
         BASE_URL + "/request/send/" + status + "/" + userId ,
         {} , 
-        {withCredentials: true}
+        {withCredentials: true},
       );
       
-      dispatch(removeFeed(userId));
-      setSuccess(true);
-
-      setTimeout(() =>{
-        return setSuccess(false);
-      } , 3000);
-
-
+      dispatch(removeUserFromFeed(userId));
+      
     } catch(err){
-      console.error(err.data);
+      console.log(err.message);
     }
   }
 
@@ -48,9 +43,6 @@ const UserCard = ({ user }) => {
           <button className="btn btn-soft" onClick={() => handleConnection("ignored" , _id)}>Dislike</button>
         </div>
       </div>
-      {success && <div className="flex justify-end fixed up-5 right-1 z-50">
-          <Alert type="success" />
-      </div>} 
     </div>
   );
 };
