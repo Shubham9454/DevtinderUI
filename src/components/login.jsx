@@ -100,12 +100,14 @@ const Login = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          className="btn btn-neutral mt-4"
+        <div className="flex justify-center">
+          <button
+          className="btn btn-neutral mt-4 px-6"
           onClick={isLoginForm ? handleLogin : handleSignup}
         >
           {isLoginForm ? "Login" : "Sign Up"}
         </button>
+        </div>
         <p
           className="flex justify-center my-2 cursor-pointer"
           onClick={() => setIsLoginForm((value) => !value)}
