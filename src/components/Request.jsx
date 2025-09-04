@@ -60,7 +60,7 @@ const Requests = () => {
           return (
             <li key={_id} className="list-row">
               <div>
-                <img className="w-10 rounded-full" src={photoURL} />
+                <img className="h-auto w-10 mr-1 rounded-full" src={photoURL} />
               </div>
               <div>
                 <div>

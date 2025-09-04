@@ -45,7 +45,7 @@ const Connections = () => {
           return (
             <li key={_id} className="list-row">
               <div>
-                <img className="size-10 rounded-box" src={photoURL} />
+                <img className="h-auto w-10 mr-1 rounded-full" src={photoURL} />
               </div>
               <div>
                 <div>{`${firstName} ${lastName}`}</div>

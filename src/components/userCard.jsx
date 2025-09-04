@@ -29,7 +29,7 @@ const UserCard = ({ user }) => {
   return (
     <div className="card bg-base-200 w-96 shadow-sm">
       <figure>
-        <img className="h-full w-full object-cover" src={photoURL} alt="Photo" />
+        <img className="h-90 w-full object-cover" src={photoURL} alt="Photo" />
       </figure>
       <div className="card-body">
         <div className="flex justify-between">
