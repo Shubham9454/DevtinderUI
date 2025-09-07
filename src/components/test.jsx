@@ -1,0 +1,89 @@
+import { useDispatch, useSelector } from "react-redux";
+import Logo from "../images/logo.png";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import BASE_URL from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
+
+const Navbar = () => {
+  const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
+      dispatch(removeUser());
+      return navigate("/login");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <div className="navbar bg-base-300 shadow-sm pl-0">
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl">
+          <img
+            src={Logo}
+            alt="DevTinder Logo"
+            className="h-10 w-10 mr-1 rounded-full"
+          />
+          DevTinder
+        </Link>
+      </div>
+      {!user && (
+        <div className="mx-3">
+          <Link
+            to="/login"
+            className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 font-medium shadow-lg"
+          >
+            Login/SignUp
+          </Link>
+        </div>
+      )}
+      <div className="flex gap-2">
+        <input
+          type="text"
+          placeholder="Search"
+          className="input input-bordered w-24 md:w-auto"
+        />
+        {user && (
+          <div className="dropdown dropdown-end">
+            Welcome, {user.firstName}
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar mx-1.5"
+            >
+              <div className="w-10 rounded-full">
+                <img alt="MyPhoto" src={user.photoURL} />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <Link to="/profile" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={"/connections"}>Connections</Link>
+              </li>
+              <li>
+                <Link to={"/requests"}>Invitations</Link>
+              </li>
+              <li>
+                <a onClick={handleLogout}>Logout</a>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;

@@ -24,19 +24,33 @@ const Navbar = () =>{
 
     return (
 
-        <div className="navbar bg-base-300 shadow-sm pl-0">
-        <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-xl">
-            <img src={Logo} alt="DevTinder Logo" className="h-10 w-10 mr-1 rounded-full" />
-            DevTinder</Link>
-        </div>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-          />
-          {user && (
+      <nav className="fixed top-0 w-full bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="text-cyan-500 mr-2">
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                <Link to="/">devTinder</Link>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#features" className="text-gray-300 hover:text-cyan-400 transition-colors">Features</a>
+              <a href="#matching" className="text-gray-300 hover:text-cyan-400 transition-colors">Matching</a>
+              <a href="#stories" className="text-gray-300 hover:text-cyan-400 transition-colors">Success Stories</a>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link to="/login" className="text-gray-300 hover:text-cyan-400 font-medium transition-colors">
+                Log In
+              </Link>
+              <Link to="/login" className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 font-medium shadow-lg">
+                Sign Up
+              </Link>
+            </div>
+            {user && (
         
             <div className="dropdown dropdown-end">Welcome, {user.firstName} 
             <div
@@ -72,8 +86,13 @@ const Navbar = () =>{
               </li>
             </ul>
           </div>)}
+          </div>
         </div>
-      </div>
+      </nav>
+
+    
+        
+          
     );
 }
 
