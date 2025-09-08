@@ -30,9 +30,14 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <Outlet />
+
+      {/* Main content expands to push footer down */}
+      <main className="flex-grow pt-16">
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );

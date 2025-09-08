@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 shadow-sm pl-0">
+    <div className="navbar bg-base-300 pl-0 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex-1 text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
         <Link to="/" className="flex">
           <img
