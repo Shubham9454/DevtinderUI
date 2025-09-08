@@ -1,3 +1,3 @@
-const BASE_URL = "https://dev-tinder-ashen.vercel.app";
+const BASE_URL = "http://localhost:7777";
 
 export default BASE_URL;
