@@ -21,14 +21,14 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-300 shadow-sm pl-0">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
+      <div className="flex-1 text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+        <Link to="/" className="flex">
           <img
             src={Logo}
             alt="DevTinder Logo"
-            className="h-10 w-10 mr-1 rounded-full"
+            className="h-12 w-12 mr-2 rounded-full mx-2"
           />
-          DevTinder
+          devTinder
         </Link>
       </div>
       {!user && (
